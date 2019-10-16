@@ -1,0 +1,46 @@
+{
+  "name": "fcc-message-board",
+  "version": "0.0.1",
+  "author": "avatarfreak",
+  "description": "Fcc project on message board",
+  "main": "server.js",
+  "scripts": {
+    "start": "env-cmd -f config/dev.env nodemon server.js",
+    "test": "env-cmd -f config/test.env mocha -u tdd -w"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "helmet": "^3.1.0",
+    "mocha": "^6.2.1",
+    "mongodb": "^2.2.16",
+    "mongoose": "^5.7.4"
+  },
+  "engines": {
+    "node": "10.15.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avatarfreak/fcc-message-board.git"
+  },
+  "keywords": [
+    "node",
+    "mocha",
+    "express",
+    "helmet",
+    "chai",
+    "bootstrap",
+    "mongoose"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/avatarfreak/fcc-message-board/issues"
+  },
+  "homepage": "https://github.com/avatarfreak/fcc-message-board#readme",
+  "devDependencies": {
+    "env-cmd": "^10.0.1"
+  }
+}
