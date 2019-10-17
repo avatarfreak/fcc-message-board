@@ -9,7 +9,7 @@ let boardSchema = Schema({
   bumped_on: { type: Date, default: new Date() },
   reported: { type: Boolean, default: false },
   delete_password: { type: String, required: true, minlength: 2 },
-  replies: [String],
+  replies: [{ type: Schema.Types.ObjectId, ref: "Reply" }],
   replycount: {
     type: Number,
     default: 0
