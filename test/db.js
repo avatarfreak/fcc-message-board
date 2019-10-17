@@ -10,8 +10,8 @@ const boardOne = {
   reported: false,
   created_on: new Date(),
   bumped_on: new Date(),
-  replies: [1, 2, "This is reply one", 3, 4, 5],
-  replycount: 6
+  replies: [],
+  replycount: 0
 };
 const boardTwo = {
   _id: new mongoose.Types.ObjectId(),
@@ -21,8 +21,8 @@ const boardTwo = {
   reported: false,
   created_on: new Date(),
   bumped_on: new Date(),
-  replies: ["This is reply two", 1, 2, "nodejs", 3, 4],
-  replycount: 6
+  replies: [],
+  replycount: 2
 };
 const boardThree = {
   _id: new mongoose.Types.ObjectId(),
@@ -32,8 +32,8 @@ const boardThree = {
   delete_password: "express",
   created_on: new Date(),
   bumped_on: new Date(),
-  replies: [7, "express 1", 8, 9, 12, 13],
-  replycount: 6
+  replies: [],
+  replycount: 0
 };
 
 const replyOne = {
