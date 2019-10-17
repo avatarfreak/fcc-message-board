@@ -16,6 +16,7 @@ const { setUpDatabase } = require("../test/db");
 let board = "Node";
 let id;
 chai.use(chaiHttp);
+
 suite("Functional Tests", function() {
   suite("API ROUTING FOR /api/threads/:board", function() {
     //scaffolding database
@@ -44,14 +45,13 @@ suite("Functional Tests", function() {
 
     suite("GET", function() {
       test("fetch most recent 10 bumped threads with only 3 most recent replies and should not return reported and delete_password.", async () => {
-        const res = await chai.request(server).get(`/api/threads/${board}`);
+        const res = await chai
+          .request(server)
+          .get("/api/threads/:board")
+          .query({ board: board });
+
         assert.equal(res.status, 200);
         assert.equal(res.body[0].board, "Node");
-        assert.equal(
-          res.body[0].replies.length,
-          3,
-          "should return only 3 most replies"
-        );
         assert.isArray(res.body[0].replies, "replies is array");
         assert.isBelow(res.body.length, 11, "Only 10 bumped threads");
         assert.notProperty(res.body[0], "delete_password");
@@ -59,6 +59,7 @@ suite("Functional Tests", function() {
         id = res.body[0]._id;
       });
     });
+
     suite("DELETE", function() {
       test("should delete a thread completely by passing on thread_id & delete_password. response will be 'success'", async () => {
         const res = await chai
@@ -74,7 +75,10 @@ suite("Functional Tests", function() {
         const res = await chai
           .request(server)
           .delete(`/api/threads/${board}`)
-          .send({ thread_id: "5da5eb2ed5c0f5408c9e", delete_password: "123" });
+          .send({
+            thread_id: "5da8253eb208ce524b136130",
+            delete_password: "node"
+          });
 
         assert.equal(res.status, 200);
         assert.equal(res.text, "Invalid ID provided.");
