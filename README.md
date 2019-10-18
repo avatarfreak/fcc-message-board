@@ -47,6 +47,46 @@
 ## Project Structure:
 
 ```
+├── assertion-analyser.js
+├── config
+│   ├── dev.env
+│   └── test.env
+├── controller
+│   ├── ReplyController.js
+│   └── ThreadController.js
+├── db
+│   └── mongoose.js
+├── model
+│   ├── boardModel.js
+│   └── replyModel.js
+├── package.json
+├── package-lock.json
+├── public
+│   ├── img
+│   │   ├── api.png
+│   │   └── favicon.ico
+│   ├── js
+│   │   ├── board.js
+│   │   ├── main.js
+│   │   └── thread.js
+│   └── style
+│       └── style.css
+├── README.md
+├── routes
+│   ├── api.js
+│   └── fcctesting.js
+├── server.js
+├── test
+│   ├── db.js
+│   └── mocha.opts
+├── test-runner.js
+├── tests
+│   ├── 1_unit-tests.js
+│   └── 2_functional-tests.js
+└── views
+    ├── board.html
+    ├── index.html
+    └── thread.html
 
 ```
 
@@ -63,9 +103,13 @@
   - \$ npm install
   - \$ npm run start
 
+## Testing:
+
+- npm test
+
 ### Project Demo:
 
-- [FCC-Stock-Price-Checker](https://avatarfreak-fcc-message-board.glitch.me)
+- [FCC-Anon-Message-Board](https://avatarfreak-fcc-message-board.glitch.me)
 
 ### Author:
 

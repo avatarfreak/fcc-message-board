@@ -2,7 +2,6 @@ $(function() {
   var currentBoard = window.location.pathname.split("/")[2];
 
   var url = "/api/threads/" + currentBoard;
-  console.log("board.html: ", url);
   $("#boardTitle").text("Welcome to " + window.location.pathname);
   $.ajax({
     type: "GET",

@@ -3,7 +3,6 @@ $(function() {
   currentURL = currentURL.split("/");
 
   var url = "/api/replies/" + currentURL[0];
-  console.log("Thread: ", url);
   $("#threadTitle").text(window.location.pathname);
   $.ajax({
     type: "GET",
