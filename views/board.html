@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to Board</title>
+    <title>Welcome to Threads</title>
     <meta name="description" content="A cool thing made with HyperDev" />
     <link
       id="favicon"
@@ -12,39 +12,65 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="/public/style/style.css" />
   </head>
   <body>
-    <header>
-      <h1 id="boardTitle"></h1>
-    </header>
+    <div class="container">
+      <header>
+        <h1
+          id="boardTitle"
+          class="bg-primary text-light rounded font-weight-bold p-1 text-center text-uppercase"
+        ></h1>
+      </header>
 
-    <div id="submitNewThread">
-      <h3>Submit a new thread:</h3>
-      <form id="newThread" method="post" action="/api/">
-        <textarea
-          rows="8"
-          cols="120"
-          type="text"
-          placeholder="Thread text..."
-          name="text"
-          required=""
-        ></textarea
-        ><br />
-        <input
-          type="text"
-          placeholder="password to delete"
-          name="delete_password"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
+      <div id="submitNewThread">
+        <form id="newThread" method="post" action="/api/">
+          <fieldset>
+            <legend>
+              Submit A New Thread:
+            </legend>
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                rows="8"
+                cols="120"
+                type="text"
+                placeholder="Thread text..."
+                name="text"
+                required=""
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="password to delete"
+                name="delete_password"
+                required=""
+              />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Submit" />
+          </fieldset>
+        </form>
+      </div>
+
+      <div id="boardDisplay"></div>
+      <hr style="margin: 50px" />
     </div>
-
-    <div id="boardDisplay"></div>
-
-    <hr style="margin: 50px; margin-top: 200px" />
-
+    <!--end of container-->
+    <footer class="bg-secondary p-3 border">
+      <p class="text-center text-light py-2">
+        <small>
+          N2D House © 2019. All rights reserved, designed and developed by Dave
+        </small>
+      </p>
+    </footer>
     <script
       src="https://code.jquery.com/jquery-2.2.1.min.js"
       integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="

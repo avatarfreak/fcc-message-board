@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to HyperDev!</title>
+    <title>Welcome to Message Board!</title>
     <meta name="description" content="A cool thing made with HyperDev" />
     <link
       id="favicon"
@@ -12,250 +12,369 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./public/style/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../public/style/style.css" />
   </head>
   <body>
-    <header>
-      <h1>
-        ISQA_3 - Anon Message Board
-      </h1>
-    </header>
-    <div id="userstories" style="margin-left: 5%; margin-top: 5%">
-      <h3>User Stories</h3>
-      <ol>
-        <li>
-          Only allow your site to be loading in an iFrame on your own pages.
-        </li>
-        <li>Do not allow DNS prefetching.</li>
-        <li>Only allow your site to send the referrer for your own pages.</li>
-        <li>
-          I can <b>POST</b> a thread to a specific message board by passing form
-          data <code>text</code> and <code>delete_password</code> to
-          <i>/api/threads/{board}</i>.(Recomend res.redirect to board page
-          /b/{board}) Saved will be <code>_id</code>, <code>text</code>,
-          <code>created_on</code>(date&amp;time),
-          <code>bumped_on</code>(date&amp;time, starts same as created_on),
-          <code>reported</code>(boolean), <code>delete_password</code>, &amp;
-          <code>replies</code>(array).
-        </li>
-        <li>
-          I can <b>POST</b> a reply to a thead on a specific board by passing
-          form data <code>text</code>, <code>delete_password</code>, &amp;
-          <code>thread_id</code> to <i>/api/replies/{board}</i> and it will also
-          update the bumped_on date to the comments date.(Recomend res.redirect
-          to thread page /b/{board}/{thread_id}) In the thread's 'replies' array
-          will be saved <code>_id</code>, <code>text</code>,
-          <code>created_on</code>, <code>delete_password</code>, &amp;
-          <code>reported</code>.
-        </li>
-        <li>
-          I can <b>GET</b> an array of the most recent 10 bumped threads on the
-          board with only the most recent 3 replies from
-          <i>/api/threads/{board}</i>. The <code>reported</code> and
-          <code>delete_passwords</code> fields will not be sent.
-        </li>
-        <li>
-          I can <b>GET</b> an entire thread with all it's replies from
-          <i>/api/replies/{board}?thread_id={thread_id}</i>. Also hiding the
-          same fields.
-        </li>
-        <li>
-          I can delete a thread completely if I send a <b>DELETE</b> request to
-          <i>/api/threads/{board}</i> and pass along the
-          <code>thread_id</code> &amp; <code>delete_password</code>. (Text
-          response will be 'incorrect password' or 'success')
-        </li>
-        <li>
-          I can delete a post(just changing the text to '[deleted]') if I send a
-          <b>DELETE</b> request to <i>/api/replies/{board}</i> and pass along
-          the <code>thread_id</code>, <code>reply_id</code>, &amp;
-          <code>delete_password</code>. (Text response will be 'incorrect
-          password' or 'success')
-        </li>
-        <li>
-          I can report a thread and change it's reported value to true by
-          sending a <b>PUT</b> request to <i>/api/threads/{board}</i> and pass
-          along the <code>thread_id</code>. (Text response will be 'success')
-        </li>
-        <li>
-          I can report a reply and change it's reported value to true by sending
-          a <b>PUT</b> request to <i>/api/replies/{board}</i> and pass along the
-          <code>thread_id</code> &amp; <code>reply_id</code>. (Text response
-          will be 'success')
-        </li>
-        <li>Complete functional tests that wholely test routes and pass.</li>
-      </ol>
-      <img
-        src="https://cdn.gomix.com/8f5547a1-a0d6-48f6-aa38-51753a0105f4%2FScreen%20Shot%202017-01-02%20at%201.04.10%20AM.png"
-      />
-      <br /><br />
-      <h2>
-        <a href="/b/general/">Go to testing <i>'/b/general/'</i> board</a>
-      </h2>
-    </div>
-    <hr style="margin: 50px" />
-    <div id="testui" style="margin-left: 5%">
-      <h2 style="text-align: left">API Tests:</h2>
-      <h4>New thread (POST /api/threads/:board)</h4>
-      <form action="/api/threads/test" method="post" id="newThread">
-        <input
-          type="text"
-          placeholder="board"
-          id="board1"
-          name="board"
-          required=""
-        /><br />
-        <textarea
-          type="text"
-          placeholder="Thread text..."
-          name="text"
-          required=""
-        ></textarea
-        ><br />
-        <input
-          type="text"
-          placeholder="password to delete"
-          name="delete_password"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
-      <hr />
-      <h4>Report thread (PUT /api/threads/:board)</h4>
-      <form id="reportThread">
-        <input
-          type="text"
-          placeholder="board"
-          id="board2"
-          name="board"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="id to report"
-          name="thread_id"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
-      <hr />
-      <h4>Delete thread (DELETE /api/threads/:board)</h4>
-      <form id="deleteThread">
-        <input
-          type="text"
-          placeholder="board"
-          id="board3"
-          name="board"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="id to delete"
-          name="thread_id"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="password"
-          name="delete_password"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
-      <hr />
+    <div class="container">
+      <header>
+        <h1
+          class="font-weight-bold text-center bg-primary text-light rounded py-2"
+        >
+          Anon Message Board
+        </h1>
+      </header>
 
-      <h4>New reply (POST /api/replies/:board)</h4>
-      <form action="/api/threads/test" method="post" id="newReply">
-        <input
-          type="text"
-          placeholder="board"
-          id="board4"
-          name="board"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="thread id"
-          name="thread_id"
-          required=""
-        /><br />
-        <textarea
-          type="text"
-          placeholder="Thread text..."
-          name="text"
-          required=""
-        ></textarea
-        ><br />
-        <input
-          type="text"
-          placeholder="password to delete"
-          name="delete_password"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
-      <hr />
-      <h4>Report reply (PUT /api/replies/:board)</h4>
-      <form id="reportReply">
-        <input
-          type="text"
-          placeholder="board"
-          id="board5"
-          name="board"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="thread id"
-          name="thread_id"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="id to report"
-          name="reply_id"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
-      <hr />
-      <h4>Delete reply (DELETE /api/replies/:board)</h4>
-      <form id="deleteReply">
-        <input
-          type="text"
-          placeholder="board"
-          id="board6"
-          name="board"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="thread id"
-          name="thread_id"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="id to delete"
-          name="reply_id"
-          required=""
-        /><br />
-        <input
-          type="text"
-          placeholder="password"
-          name="delete_password"
-          required=""
-        /><br />
-        <input type="submit" value="Submit" />
-      </form>
+      <div id="testui">
+        <h4 class="font-weight-bold text-dark">API Tests:</h4>
+        <div class="d-flex justify-content-around">
+          <div class="col card" style="background-color: #4eab96;">
+            <form action="/api/threads/test" method="post" id="newThread">
+              <fieldset>
+                <legend>
+                  New thread (POST /api/threads/:board)
+                </legend>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="board"
+                    id="board1"
+                    name="board"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    placeholder="Thread text..."
+                    name="text"
+                    required=""
+                  ></textarea>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="password to delete"
+                    name="delete_password"
+                    required=""
+                  />
+                </div>
+                <input
+                  class="btn btn-outline-primary"
+                  type="submit"
+                  value="Submit"
+                />
+              </fieldset>
+            </form>
+            <form id="reportThread">
+              <fieldset>
+                <legend>
+                  Report thread (PUT /api/threads/:board)
+                </legend>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="board"
+                    id="board2"
+                    name="board"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="id to report"
+                    name="thread_id"
+                    required=""
+                  />
+                </div>
+
+                <input
+                  class="btn btn-outline-light"
+                  type="submit"
+                  value="Submit"
+                />
+              </fieldset>
+            </form>
+            <form id="deleteThread">
+              <fieldset>
+                <legend>
+                  Delete thread (DELETE /api/threads/:board)
+                </legend>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="board"
+                    id="board3"
+                    name="board"
+                    required=""
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="id to delete"
+                    name="thread_id"
+                    required=""
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="password"
+                    name="delete_password"
+                    required=""
+                  />
+                </div>
+                <input
+                  class="btn btn-outline-danger"
+                  type="submit"
+                  value="Submit"
+                />
+              </fieldset>
+            </form>
+          </div>
+          <!--end of first col-->
+          <div class="col card" style="background-color: #9ba4ea;">
+            <form action="/api/threads/test" method="post" id="newReply">
+              <fieldset>
+                <legend>New reply (POST /api/replies/:board)</legend>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="board"
+                    id="board4"
+                    name="board"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="thread id"
+                    name="thread_id"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    placeholder="Thread text..."
+                    name="text"
+                    required=""
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="password to delete"
+                    name="delete_password"
+                    required=""
+                  />
+                </div>
+                <input class="btn btn-primary" type="submit" value="Submit" />
+              </fieldset>
+            </form>
+            <form id="reportReply">
+              <fieldset>
+                <legend>Report reply (PUT /api/replies/:board)</legend>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="board"
+                    id="board5"
+                    name="board"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="thread id"
+                    name="thread_id"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="id to report"
+                    name="reply_id"
+                    required=""
+                  />
+                </div>
+                <input class="btn btn-success" type="submit" value="Submit" />
+              </fieldset>
+            </form>
+
+            <form id="deleteReply">
+              <fieldset>
+                <legend>Delete reply (DELETE /api/replies/:board)</legend>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="board"
+                    id="board6"
+                    name="board"
+                    required=""
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="thread id"
+                    name="thread_id"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="id to delete"
+                    name="reply_id"
+                    required=""
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="password"
+                    name="delete_password"
+                    required=""
+                  />
+                </div>
+                <input class="btn btn-danger" type="submit" value="Submit" />
+              </fieldset>
+            </form>
+          </div>
+          <!--end of second col-->
+        </div>
+      </div>
+      <!--end of test ui-->
+      <div class="m-2 text-center bg-light border border-success p-3">
+        <figure>
+          <h2>
+            <a href="/b/general/">Go to testing <i>'/b/general/'</i> board</a>
+          </h2>
+          <img src="/public/img/api.png" />
+        </figure>
+      </div>
+      <div id="userstories">
+        <h3 class="font-weight-bold text-dark">User Stories</h3>
+        <ol class="list-group">
+          <li class="list-group-item active">
+            Only allow your site to be loading in an iFrame on your own pages.
+          </li>
+          <li class="list-group-item">Do not allow DNS prefetching.</li>
+          <li class="list-group-item">
+            Only allow your site to send the referrer for your own pages.
+          </li>
+          <li class="list-group-item">
+            I can <b>POST</b> a thread to a specific message board by passing
+            form data <code>text</code> and <code>delete_password</code> to
+            <i>/api/threads/{board}</i>.(Recomend res.redirect to board page
+            /b/{board}) Saved will be <code>_id</code>, <code>text</code>,
+            <code>created_on</code>(date&amp;time),
+            <code>bumped_on</code>(date&amp;time, starts same as created_on),
+            <code>reported</code>(boolean), <code>delete_password</code>, &amp;
+            <code>replies</code>(array).
+          </li>
+          <li class="list-group-item">
+            I can <b>POST</b> a reply to a thead on a specific board by passing
+            form data <code>text</code>, <code>delete_password</code>, &amp;
+            <code>thread_id</code> to <i>/api/replies/{board}</i> and it will
+            also update the bumped_on date to the comments date.(Recomend
+            res.redirect to thread page /b/{board}/{thread_id}) In the thread's
+            'replies' array will be saved <code>_id</code>, <code>text</code>,
+            <code>created_on</code>, <code>delete_password</code>, &amp;
+            <code>reported</code>.
+          </li>
+          <li class="list-group-item">
+            I can <b>GET</b> an array of the most recent 10 bumped threads on
+            the board with only the most recent 3 replies from
+            <i>/api/threads/{board}</i>. The <code>reported</code> and
+            <code>delete_passwords</code> fields will not be sent.
+          </li>
+          <li class="list-group-item">
+            I can <b>GET</b> an entire thread with all it's replies from
+            <i>/api/replies/{board}?thread_id={thread_id}</i>. Also hiding the
+            same fields.
+          </li>
+          <li class="list-group-item">
+            I can delete a thread completely if I send a <b>DELETE</b> request
+            to <i>/api/threads/{board}</i> and pass along the
+            <code>thread_id</code> &amp; <code>delete_password</code>. (Text
+            response will be 'incorrect password' or 'success')
+          </li>
+          <li class="list-group-item">
+            I can delete a post(just changing the text to '[deleted]') if I send
+            a
+            <b>DELETE</b> request to <i>/api/replies/{board}</i> and pass along
+            the <code>thread_id</code>, <code>reply_id</code>, &amp;
+            <code>delete_password</code>. (Text response will be 'incorrect
+            password' or 'success')
+          </li>
+          <li class="list-group-item">
+            I can report a thread and change it's reported value to true by
+            sending a <b>PUT</b> request to <i>/api/threads/{board}</i> and pass
+            along the <code>thread_id</code>. (Text response will be 'success')
+          </li>
+          <li class="list-group-item">
+            I can report a reply and change it's reported value to true by
+            sending a <b>PUT</b> request to <i>/api/replies/{board}</i> and pass
+            along the <code>thread_id</code> &amp; <code>reply_id</code>. (Text
+            response will be 'success')
+          </li>
+          <li class="list-group-item">
+            Complete functional tests that wholely test routes and pass.
+          </li>
+        </ol>
+      </div>
+      <!--endof userStrories-->
+      <hr style="margin: 50px" />
     </div>
-    <hr style="margin: 50px; margin-top: 200px" />
+    <!-- end of container -->
+    <footer class="bg-secondary p-3 border">
+      <p class="text-center text-light py-2">
+        <small>
+          N2D House © 2019. All rights reserved, designed and developed by Dave
+        </small>
+      </p>
+    </footer>
     <!-- Your web-app is https, so your scripts need to be too -->
     <script
       src="https://code.jquery.com/jquery-2.2.1.min.js"
       integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
       crossorigin="anonymous"
     ></script>
-    <script src="../public/js/main.js"></script>
+    <script src="/public/js/main.js"></script>
   </body>
 </html>

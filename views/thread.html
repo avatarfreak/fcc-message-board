@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome to HyperDev!</title>
+    <title>Welcome to Threads</title>
     <meta name="description" content="A cool thing made with HyperDev" />
     <link
       id="favicon"
@@ -12,17 +12,34 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="/public/style/style.css" />
   </head>
   <body>
-    <header>
-      <h1 id="threadTitle"></h1>
-    </header>
-    <br />
+    <div class="container">
+      <header>
+        <h1
+          id="threadTitle"
+          class="bg-primary text-light rounded font-weight-bold p-1 text-center text-uppercase"
+        ></h1>
+      </header>
 
-    <div id="boardDisplay"></div>
-
-    <hr style="margin: 50px; margin-top: 200px" />
+      <div id="boardDisplay"></div>
+      <hr style="margin: 50px" />
+    </div>
+    <!--end of container-->
+    <footer class="bg-secondary p-3 border">
+      <p class="text-center text-light py-2">
+        <small>
+          N2D House © 2019. All rights reserved, designed and developed by Dave
+        </small>
+      </p>
+    </footer>
     <!-- Your web-app is https, so your scripts need to be too -->
     <script
       src="https://code.jquery.com/jquery-2.2.1.min.js"

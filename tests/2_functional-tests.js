@@ -45,10 +45,7 @@ suite("Functional Tests", function() {
 
     suite("GET", function() {
       test("fetch most recent 10 bumped threads with only 3 most recent replies and should not return reported and delete_password.", async () => {
-        const res = await chai
-          .request(server)
-          .get("/api/threads/:board")
-          .query({ board: board });
+        const res = await chai.request(server).get(`/api/threads/${board}`);
 
         assert.equal(res.status, 200);
         assert.equal(res.body[0].board, "Node");
