@@ -28,10 +28,11 @@
 - I can delete a post(just changing the text to '[deleted]') if I send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, & delete_password. (Text response will be 'incorrect password' or 'success')
 - I can report a thread and change it's reported value to true by sending a PUT request to /api/threads/{board} and pass along the thread_id. (Text response will be 'success')
 - I can report a reply and change it's reported value to true by sending a PUT request to /api/replies/{board} and pass along the thread_id & reply_id. (Text response will be 'success')
-- Complete functional tests that wholely test routes and pass.  
-   | API | GET | POST | PUT | DELETE |
-  |:--------------------:|:--------------------------:|:----------------------:|:----------------------:|:------------------------------------:|
-  | /api/threads/{board} | list recent threads | create thread | report thread | delete thread with password |
+- Complete functional tests that wholely test routes and pass.
+
+  |         API          |            GET             |          POST          |          PUT           |                DELETE                |
+  | :------------------: | :------------------------: | :--------------------: | :--------------------: | :----------------------------------: |
+  | /api/threads/{board} |    list recent threads     |     create thread      |     report thread      |     delete thread with password      |
   | /api/replies/{board} | show all replies on thread | create reply on thread | report reply on thread | change reply to '[delete]' on thread |
 
 ## Technologies
